@@ -12,3 +12,14 @@ Añadir su agenda Telefonica a su nueva agendaDigital
 
 ### Para que
 Para tenerlo en la red
+
+## 2 Historia PhoneBook
+
+### Quien
+El usuario
+
+### Que quiere
+Quiere listar a todos los contactos,ya sea por nombre o apellido
+
+### Para que
+Quiere visualizar el total de ellos

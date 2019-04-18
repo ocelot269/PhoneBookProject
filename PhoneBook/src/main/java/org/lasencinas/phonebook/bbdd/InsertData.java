@@ -60,7 +60,7 @@ public class InsertData implements Readable {
             }
             phoneBookTXT.close(); //Cierras el Buffer
         } catch (FileNotFoundException e) {                 //Catch en caso de que no encuentre el archivo o la ruta sea equivocá
-            System.out.println("Archivo no encontrado,posibles causas mal introducida la ruta o archivo no existente");
+            System.out.println("Archivo no encontrado,posibles causas, mal introducida la ruta o archivo no existente");
         }
 
     }
