@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.lasencinas.phonebook.bbdd.Bbdd;
-import org.lasencinas.phonebook.bbdd.InsertData;
+import org.lasencinas.phonebook.consumer.InsertData;
 import org.lasencinas.phonebook.interfaces.Listable;
 
 public class PhoneBookIT {

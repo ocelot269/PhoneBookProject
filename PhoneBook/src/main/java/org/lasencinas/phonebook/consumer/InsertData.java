@@ -1,10 +1,11 @@
-package org.lasencinas.phonebook.bbdd;
+package org.lasencinas.phonebook.consumer;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import org.lasencinas.phonebook.bbdd.Bbdd;
 
 import org.lasencinas.phonebook.interfaces.Readable;
 

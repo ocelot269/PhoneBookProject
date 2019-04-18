@@ -1,8 +1,9 @@
 
-package org.lasencinas.phonebook.bbdd;
+package org.lasencinas.phonebook.consumer;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.lasencinas.phonebook.bbdd.Bbdd;
 
 
 public class InsertDataIT {

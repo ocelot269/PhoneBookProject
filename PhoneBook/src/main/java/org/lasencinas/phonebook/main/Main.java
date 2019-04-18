@@ -2,7 +2,7 @@ package org.lasencinas.phonebook.main;
 
 import java.io.IOException;
 import org.lasencinas.phonebook.bbdd.Bbdd;
-import org.lasencinas.phonebook.bbdd.InsertData;
+import org.lasencinas.phonebook.consumer.InsertData;
 import org.lasencinas.phonebook.consumer.PhoneBook;
 import org.lasencinas.phonebook.interfaces.Findable;
 import org.lasencinas.phonebook.interfaces.Listable;
@@ -89,7 +89,9 @@ public class Main {
         System.out.println("Iniciando busqueda ..\n");
         agendaBuscable.FindUsers("Clark", "portland");
 
-        System.out.println("\nApagando agenda..");
+        System.out.println("\nApagando agenda...");
+        
+
 
     }
 }
