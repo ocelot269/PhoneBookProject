@@ -1,6 +1,7 @@
 package org.lasencinas.phonebook.consumer;
 
 import java.io.IOException;
+import java.util.Locale;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -12,45 +13,42 @@ public class PhoneBookIT {
 
     public PhoneBookIT() {
     }
-    
-   
-    
-    
+
     @Test
     public void testListUsers() throws IOException { //Pendiente de forma de testear de manera correcta
         InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
         datos.readTXT();
-        
-        int contador=0;
-        
+
+        int contador = 0;
+
         for (String phone : Bbdd.phoneBook.keySet()) {
-             
-            if (Bbdd.phoneBook.get(phone).contains("Kevin")){
-                contador+=1;
+
+            if (Bbdd.phoneBook.get(phone).contains("Kevin")) {
+                contador += 1;
             }
-            
+
         }
-       assertThat(contador).isEqualTo(5);
+        assertThat(contador).isEqualTo(5);
     }
-    
-    @Test 
-    public void testListUsers1()throws IOException{
+
+    @Test
+    public void testListUsers1() throws IOException {
         PhoneBook agenda = new PhoneBook("Linda", "San Antonio");
         InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
         datos.readTXT();
         agenda.AddUsers("Linda", "00000000", "san antonio");
-        
-        int contador=0;
-        
+
+        int contador = 0;
+
         for (String phone : Bbdd.phoneBook.keySet()) {
-             
-            if (Bbdd.phoneBook.get(phone).contains(agenda.getName())){
-                contador+=1;
+
+            if (Bbdd.phoneBook.get(phone).contains(agenda.getName())) {
+                contador += 1;
             }
-            
+
         }
-       assertThat(contador).isEqualTo(2);
-       agenda.DeleteUsers("00000000");
+        assertThat(contador).isEqualTo(2);
+        agenda.DeleteUsers("00000000");
     }
 
     @Test
@@ -81,39 +79,39 @@ public class PhoneBookIT {
         InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
         datos.readTXT();
         agenda.AddUsers("Linda", "00000000", "san antonio");
-        
-        int contador=0;
-        
+
+        int contador = 0;
+
         for (String phone : Bbdd.phoneBook.keySet()) {
-             
-            if (Bbdd.phoneBook.get(phone).contains("Kevin") && Bbdd.nameAndCitys.get(phone).equalsIgnoreCase("phoenix")){
-                contador+=1;
+
+            if (Bbdd.phoneBook.get(phone).contains("Kevin") && Bbdd.nameAndCitys.get(phone).equalsIgnoreCase("phoenix")) {
+                contador += 1;
             }
-            
+
         }
-       assertThat(contador).isEqualTo(2);
-       agenda.DeleteUsers("00000000");
+        assertThat(contador).isEqualTo(2);
+        agenda.DeleteUsers("00000000");
 
     }
-    
+
     @Test
     public void testFindUsers1() throws IOException {
-        PhoneBook agenda = new PhoneBook("Garcia" ,"Virginia beach");
+        PhoneBook agenda = new PhoneBook("Garcia", "Virginia beach");
         InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
         datos.readTXT();
         agenda.AddUsers("Linda Garcia", "00000000", "san antonio");
-        
-        int contador=0;
-        
+
+        int contador = 0;
+
         for (String phone : Bbdd.phoneBook.keySet()) {
-             
-            if (Bbdd.phoneBook.get(phone).contains(agenda.getName()) && Bbdd.nameAndCitys.get(phone).equalsIgnoreCase(agenda.getCity())){
-                contador+=1;
+
+            if (Bbdd.phoneBook.get(phone).contains(agenda.getName()) && Bbdd.nameAndCitys.get(phone).equalsIgnoreCase(agenda.getCity())) {
+                contador += 1;
             }
-            
+
         }
-       assertThat(contador).isEqualTo(1);
-       agenda.DeleteUsers("00000000");
+        assertThat(contador).isEqualTo(1);
+        agenda.DeleteUsers("00000000");
 
     }
 }

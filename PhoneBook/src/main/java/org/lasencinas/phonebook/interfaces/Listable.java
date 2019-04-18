@@ -1,9 +1,9 @@
-
 package org.lasencinas.phonebook.interfaces;
 
-
 public interface Listable {
-    void ListUsers(String name); //ListUsers nos permitira listar todos los usuarios
+
+    void ListUsers(String name); //ListUsers nos permitira listar todos los usuarios por nombre
+
     void ListUsers();//Metodo sobrecargado
-                        
+
 }

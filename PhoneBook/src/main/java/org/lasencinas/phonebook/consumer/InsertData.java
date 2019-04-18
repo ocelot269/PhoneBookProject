@@ -5,19 +5,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 import org.lasencinas.phonebook.interfaces.Readable;
 
 public class InsertData implements Readable {
 
     //Variables
-    private String route = "";
-    
-    
+    private String route = ""; //Programacion defensiva
+    private String regex = "[|] "; //Expresion regular para separar mi .txt
+
     //Constructor por defecto
-    public InsertData(){
-        
+    public InsertData() {
+
     }
 
     //Constructor sobrecargado
@@ -34,6 +33,15 @@ public class InsertData implements Readable {
         this.route = route;
     }
 
+    public String getRegex() {
+        return regex;
+    }
+
+    public void setRegex(String regex) {
+        this.regex = regex;
+    }
+
+    //Logica
     @Override
     public void readTXT() throws IOException {
 
@@ -43,7 +51,7 @@ public class InsertData implements Readable {
 
             while ((line = phoneBookTXT.readLine()) != null) {
 
-                String[] parts = line.split("[|] ");
+                String[] parts = line.split(getRegex());//se utiliza una expresion regular para la separacion entre los campos
 
                 if (parts.length >= 2) { //Esta parte mira que la separacion hecha por el split se ha minima de 2
                     String name = parts[0].trim(); //te obtiene los nombre del archivo de texto y el trim te quita tabulaciones y espacios al principio y al final del texto

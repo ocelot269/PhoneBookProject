@@ -1,6 +1,6 @@
 # PhoneBookProyect
 
-El proyecto consiste en crear una agenda telefonica a partir de una agenda de texto,para verificar la calidad del proyecto el proyecto se hará bajo SOLID Y TDD
+El proyecto consiste en crear una agenda telefónica a partir de una agenda de texto, para verificar la calidad del proyecto se hará bajo SOLID y TDD
 
 ## 1 Historia PhoneBook
 

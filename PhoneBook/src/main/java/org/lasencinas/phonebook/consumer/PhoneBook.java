@@ -43,8 +43,7 @@ public class PhoneBook implements Listable, Findable {
     public void ListUsers(String name) { //He modificado el nombre del metodo porque me parecia poco intuitivo
 
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorre la base de datos
-            if (Bbdd.phoneBook.get(phone).contains(name)) { //Esta condicion busca que el valor del mapa 
-                //contenga parte del nombre pasado por parametro
+            if (Bbdd.phoneBook.get(phone).contains(name)) { //Esta condicion busca que el valor del mapa contenga parte del nombre pasado por parametro
                 System.out.println(Bbdd.phoneBook.get(phone) + " y su telefono es " + phone); //Mensaje con los contactos encontrados
             } else {
                 //Si no encuentra nada falla silenciosamente
@@ -56,8 +55,7 @@ public class PhoneBook implements Listable, Findable {
     //Metodo sobrecargado
     public void ListUsers() { //Lo mismo que el metodo anterior pero sin pasarle parametros
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorre la base de datos
-            if (Bbdd.phoneBook.get(phone).contains(getName())) { //Esta condicion busca que el valor del mapa 
-                //contenga parte del nombre pasado por parametro
+            if (Bbdd.phoneBook.get(phone).contains(getName())) { //Esta condicion busca que el valor del mapa contenga parte del nombre pasado por parametro
                 System.out.println(Bbdd.phoneBook.get(phone) + " y su telefono es " + phone); //Mensaje con los contactos encontrados
             } else {
                 //Si no encuentra nada falla silenciosamente
@@ -96,12 +94,12 @@ public class PhoneBook implements Listable, Findable {
          
      }
      
-     public void AddUsers(String name,String phone,String city){
+     public void AddUsers(String name,String phone,String city){ //Te permite añadir contacto a la base de datos
          Bbdd.phoneBook.put(phone, name);
          Bbdd.nameAndCitys.put(phone, city);
      }
      
-     public void DeleteUsers(String phone){
+     public void DeleteUsers(String phone){ //Te permite eliminar contactos de la base de datos
          if (Bbdd.phoneBook.containsKey(phone)) {
             Bbdd.phoneBook.remove(phone);
             Bbdd.nameAndCitys.remove(phone); 
