@@ -12,8 +12,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Readable datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
-        Listable agenda = new PhoneBook();
+        Readable datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt"); //Introduzca la ruta a su archivo.txt
+        Listable agenda = new PhoneBook(); 
+        PhoneBook agendaTelefonica =(PhoneBook)agenda;//Upcasting
+        Findable agendaBuscable = (Findable) agenda; //Upcasting
+  //    Listable agenda1 = new PhoneBook("Jones", "Portland"); //Opcional
+  //    Findable agendaBuscable1 = (Findable) agenda1; //Upcasting //Opcional
         datos.readTXT();
 
         System.out.println("Arrancando agenda electronica... \n");
@@ -61,15 +65,29 @@ public class Main {
 
         agenda.ListUsers("Ke"); //En este metodo puedes buscar el nombre de cualquier persona de la base de datos
                                 //Importante que este bien escrito
+
+  //    agenda1.ListUsers(); //Este metodo es igual al anterior pero sin pasarle parametros //Opcional
+  
         System.out.println("\nEstos son todos los contactos listados");
 
-        System.out.println("\nProcesando busqueda por nombre y ciudad\n");
         
-        System.out.println("Buscando en la base de datos...\n");
         
-        Findable agendaBuscable = (Findable) agenda; //Upcasting
+        agendaTelefonica.AddUsers("Jose", "654020017", "Palma");
         
-        agendaBuscable.FindUsers("Kevin", "Phoenix");//Buscamos por nombre y ciudad
+        System.out.println("\nContacto añadido exitosamente\n");
+        
+        System.out.println("\nProcesando busqueda por nombre y ciudad\n");    
+        
+        System.out.println("Buscando en la base de datos coincidencias...\n");
+    
+        agendaBuscable.FindUsers("Jose", "Palma");//Buscamos por nombre y ciudad 
+    //    agendaBuscable1.FindUsers();  //Opcional
+    
+        agendaTelefonica.DeleteUsers("654020017");
+        
+        System.out.println("\nContacto eliminado exitosamente\n");
+        
+        agendaBuscable.FindUsers("Jose", "Palma");
 
     }
 }
