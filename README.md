@@ -19,7 +19,18 @@ Para tenerlo en la red
 El usuario
 
 ### Que quiere
-Quiere listar a todos los contactos,ya sea por nombre o apellido
+Quiere listar contactos,ya sea por el nombre o su apellido
 
 ### Para que
-Quiere visualizar el total de ellos
+Quiere visualizar el total de coincidencias
+
+## 3 Historia PhoneBook
+
+### Quien
+El usuario
+
+### Que quiere
+Quiere listar contactos,ya sea por el nombre o el apellido y su ciudad
+
+### Para que
+Quiere visualizar el total de coincidencias
