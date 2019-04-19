@@ -13,11 +13,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Readable datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt"); //Introduzca la ruta a su archivo.txt
-        Listable agenda = new PhoneBook();
-        PhoneBook agendaTelefonica = (PhoneBook) agenda;//Upcasting
-        Findable agendaBuscable = (Findable) agenda; //Upcasting
-        //    Listable agenda1 = new PhoneBook("Jones", "Portland"); //Opcional
-        //    Findable agendaBuscable1 = (Findable) agenda1; //Upcasting //Opcional
+        PhoneBook agenda = new PhoneBook();
+        Findable agendaBuscable = (Findable) agenda; //Upcasting 
+        PhoneBook agendaBuscable1 = (PhoneBook) agendaBuscable; //Upcasting
+        //  Listable agenda1 = new PhoneBook("Jones", "Portland"); //Opcional
+        //  Findable agendaBuscable2 = (Findable) agenda1; //Upcasting //Opcional
+        //  PhoneBook agenda3 = (PhoneBook) agenda1;
         datos.readTXT();
 
         System.out.println("Arrancando agenda electronica... \n");
@@ -63,13 +64,17 @@ public class Main {
 
         System.out.println("Buscando similitudes... \n");
 
-        agenda.ListUsers("Ke"); //En este metodo puedes buscar el nombre de cualquier persona de la base de datos
-        //Importante que este bien escrito
-
+        agenda.ListUsers("ke"); //En este metodo puedes buscar el nombre de cualquier persona de la base de datos
+        
+        
         //    agenda1.ListUsers(); //Este metodo es igual al anterior pero sin pasarle parametros //Opcional
+        //    agenda3.showResultSearch(); //Opcional
+        
+        agenda.showResultSearch();
+
         System.out.println("\nEstos son todos los contactos listados");
 
-        agendaTelefonica.AddUsers("Jose", "654020017", "Palma");
+        agenda.AddUsers("Jose", "654020017", "Palma");
 
         System.out.println("\nContacto añadido exitosamente\n");
 
@@ -77,21 +82,28 @@ public class Main {
 
         System.out.println("Buscando en la base de datos coincidencias...\n");
 
-        agendaBuscable.FindUsers("Jose", "Palma");//Buscamos por nombre y ciudad 
-        //    agendaBuscable1.FindUsers();  //Opcional
+        agendaBuscable.FindUsers("Jose", "Palma");//Buscamos por nombre y ciudad
 
-        agendaTelefonica.DeleteUsers("654020017");
+        //    agendaBuscable2.FindUsers();  //Opcional
+        //    agenda3.showResultSearch(); //Opcional
+        
+        agenda.showResultSearch();
+
+        agenda.DeleteUsers("654020017");
 
         System.out.println("\nContacto eliminado exitosamente\n");
 
-        agendaBuscable.FindUsers("Jose", "Palma");
+        agendaBuscable.FindUsers("Jose", "Palma");//No debe aparecer porque esta eliminado
+
+        agendaBuscable1.showResultSearch();
 
         System.out.println("Iniciando busqueda ..\n");
-        agendaBuscable.FindUsers("Clark", "portland");
+
+        agendaBuscable.FindUsers("Garcia", "virginia beach");
+
+        agenda.showResultSearch();
 
         System.out.println("\nApagando agenda...");
-        
-
 
     }
 }
