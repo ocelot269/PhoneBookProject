@@ -60,8 +60,7 @@ public class PhoneBook implements Listable, Findable, Printable {
     }
 
     //Logica
-    public String firstUppercaseChar(String name) {
-
+    public String firstUppercaseChar(String name) { //Convierte el primer caracter en mayuscula y el resto en minusculas
         return name.toUpperCase().charAt(0) + name.substring(1, name.length()).toLowerCase();
     }
 
@@ -102,7 +101,7 @@ public class PhoneBook implements Listable, Findable, Printable {
     @Override
     public String FindUsers(String name, String cities) {//He modificado el nombre porque no me parecia lo suficientemente descriptivo
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorremos la base de datos
-            if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(name)) && Bbdd.nameAndCitys.get(phone).equalsIgnoreCase(cities)) {//Ignora si el nombre de la ciudad tiene mayusculas o minusculas
+            if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(name)) && Bbdd.nameAndCities.get(phone).equalsIgnoreCase(cities)) {//Ignora si el nombre de la ciudad tiene mayusculas o minusculas
                 //Buscamos si el nombre está en la base de datos  y luego comparamos si las ciudades coinciden
                 setPrintCode("\n" + Bbdd.phoneBook.get(phone) + " su telefono es " + phone + " y vive en " + cities);
                 getUsersByName().add(getPrintCode());//Lo añades al Hashset
@@ -119,7 +118,7 @@ public class PhoneBook implements Listable, Findable, Printable {
     @Override
     public String FindUsers() {
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorremos la base de datos
-            if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(getName())) && Bbdd.nameAndCitys.get(phone).equalsIgnoreCase(getCity())) {
+            if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(getName())) && Bbdd.nameAndCities.get(phone).equalsIgnoreCase(getCity())) {
                 //Buscamos si el nombre está en la base de datos  y luego comparamos si las ciudades coinciden
                 setPrintCode("\n" + Bbdd.phoneBook.get(phone) + " su telefono es " + phone + " y vive en " + getCity());
                 getUsersByName().add(getPrintCode());//Lo añades al Hashset
@@ -146,14 +145,14 @@ public class PhoneBook implements Listable, Findable, Printable {
 
     public void AddUsers(String name, String phone, String city) { //Te permite añadir contacto a la base de datos
         Bbdd.phoneBook.put(phone, name);
-        Bbdd.nameAndCitys.put(phone, city);
+        Bbdd.nameAndCities.put(phone, city);
     }
 
     public void DeleteUsers(String phone) { //Te permite eliminar contactos de la base de datos
         
         if (Bbdd.phoneBook.containsKey(phone)) {
             Bbdd.phoneBook.remove(phone);
-            Bbdd.nameAndCitys.remove(phone);
+            Bbdd.nameAndCities.remove(phone);
         }
 
     }

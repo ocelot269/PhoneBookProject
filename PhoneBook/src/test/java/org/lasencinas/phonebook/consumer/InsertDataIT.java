@@ -31,15 +31,15 @@ public class InsertDataIT {
     public void testReadTXT() throws Exception {
         InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
         assertEquals(0,Bbdd.phoneBook.size());
-        assertEquals(0,Bbdd.nameAndCitys.size());
+        assertEquals(0,Bbdd.nameAndCities.size());
         datos.readTXT();
         assertNotNull(Bbdd.phoneBook);
-        assertNotNull(Bbdd.nameAndCitys);
+        assertNotNull(Bbdd.nameAndCities);
         assertEquals(7, Bbdd.phoneBook.size());
-        assertEquals(7, Bbdd.nameAndCitys.size());
+        assertEquals(7, Bbdd.nameAndCities.size());
         assertEquals(true, Bbdd.phoneBook.containsValue("Kevin"));
-        assertEquals(false, Bbdd.nameAndCitys.containsValue("Palma"));
-        assertEquals(true, Bbdd.nameAndCitys.containsValue("Phoenix"));
+        assertEquals(false, Bbdd.nameAndCities.containsValue("Palma"));
+        assertEquals(true, Bbdd.nameAndCities.containsValue("Phoenix"));
     }
     
 }

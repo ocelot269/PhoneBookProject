@@ -60,7 +60,7 @@ public class InsertData implements Readable {
                     String phone = parts[2].trim(); //te obtiene los telefonos  del archivo de texto y el trim te quita tabulaciones y espacios al principio y al final del texto
 
                     Bbdd.phoneBook.put(phone, name); //Añade a la base de datos telefono y nombre
-                    Bbdd.nameAndCitys.put(phone, city); // Añade a la base de datos telefono y ciudad
+                    Bbdd.nameAndCities.put(phone, city); // Añade a la base de datos telefono y ciudad
 
                 } else {
                     //Else por si hay algun caso inesperado

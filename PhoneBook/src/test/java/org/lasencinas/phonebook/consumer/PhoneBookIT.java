@@ -18,7 +18,7 @@ public class PhoneBookIT {
 
     @Test
     public void testListUsers() throws IOException { //Pendiente de forma de testear de manera correcta
-        InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
+        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
         PhoneBook agenda = new PhoneBook();
         datos.readTXT();
         agenda.ListUsers("Kevin");
@@ -37,18 +37,19 @@ public class PhoneBookIT {
     @Test
     public void testListUsers1() throws IOException {
         PhoneBook agenda = new PhoneBook("Linda", "San Antonio");
-        InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
+        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
         datos.readTXT();
         agenda.AddUsers("Linda", "00000000", "san antonio");
         agenda.ListUsers();
 
         int contador = 0;
-        for (int i = 0; i < agenda.getPrintCode().length(); i++) {
+        for (StringTokenizer stringTokenizer = new StringTokenizer(agenda.getPrintCode()); stringTokenizer.hasMoreTokens();) {
+            String token = stringTokenizer.nextToken();
 
-            if (agenda.getPrintCode().charAt(i) == 'L') {
+            if (token.equalsIgnoreCase("linda")) {
                 contador += 1;
-            }
 
+            }
         }
         assertThat(contador).isEqualTo(2);
         agenda.DeleteUsers("00000000");
@@ -59,9 +60,9 @@ public class PhoneBookIT {
         PhoneBook agenda = new PhoneBook();
         agenda.AddUsers("Jose", "654000000", "Palma");
         assertNotNull(Bbdd.phoneBook);
-        assertNotNull(Bbdd.nameAndCitys);
+        assertNotNull(Bbdd.nameAndCities);
         assertEquals(8, Bbdd.phoneBook.size());
-        assertEquals(8, Bbdd.nameAndCitys.size());
+        assertEquals(8, Bbdd.nameAndCities.size());
 
     }
 
@@ -70,16 +71,16 @@ public class PhoneBookIT {
         PhoneBook agenda = new PhoneBook();
         agenda.AddUsers("Jose", "654000000", "Palma");
         assertNotNull(Bbdd.phoneBook);
-        assertNotNull(Bbdd.nameAndCitys);
+        assertNotNull(Bbdd.nameAndCities);
         agenda.DeleteUsers("654000000");
         assertEquals(0, Bbdd.phoneBook.size());
-        assertEquals(0, Bbdd.nameAndCitys.size());
+        assertEquals(0, Bbdd.nameAndCities.size());
     }
 
     @Test
     public void testFindUsers() throws IOException {
         PhoneBook agenda = new PhoneBook();
-        InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
+        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
         datos.readTXT();
         agenda.FindUsers("kevin", "phoenix");
 
@@ -105,7 +106,7 @@ public class PhoneBookIT {
     @Test
     public void testFindUsers1() throws IOException {
         PhoneBook agenda = new PhoneBook("Garcia", "Virginia beach");
-        InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
+        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
         datos.readTXT();
         agenda.FindUsers();
         double contador = 0;
@@ -118,6 +119,7 @@ public class PhoneBookIT {
 
             } else if (token.equalsIgnoreCase("Virginia")) {
                 contador += 0.25;
+                
             } else if (token.equalsIgnoreCase("beach")) {
                 contador += 0.25;
             } else {
@@ -128,5 +130,10 @@ public class PhoneBookIT {
         assertEquals(contador, 1, 0);
 
     }
-
+    @Test
+        public void firstUppercaseCharTest(){
+            PhoneBook agenda = new PhoneBook();
+            assertEquals("Kevin", agenda.firstUppercaseChar("KeViN"));
+            assertEquals("Kevin", agenda.firstUppercaseChar("kevin"));
+        }
 }

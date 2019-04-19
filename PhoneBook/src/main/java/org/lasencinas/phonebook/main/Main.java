@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Readable datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt"); //Introduzca la ruta a su archivo.txt
+        Readable datos = new InsertData("agenda/AgendaTelefonica.txt"); //Introduzca la ruta a su archivo.txt
         PhoneBook agenda = new PhoneBook();
         Findable agendaBuscable = (Findable) agenda; //Upcasting 
         PhoneBook agendaBuscable1 = (PhoneBook) agendaBuscable; //Upcasting
