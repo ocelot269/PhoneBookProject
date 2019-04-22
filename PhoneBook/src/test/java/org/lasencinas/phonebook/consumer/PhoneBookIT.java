@@ -1,12 +1,13 @@
 package org.lasencinas.phonebook.consumer;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Locale;
+
+
 import java.util.StringTokenizer;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.lasencinas.phonebook.bbdd.Bbdd;
 import org.lasencinas.phonebook.consumer.InsertData;
 import org.lasencinas.phonebook.interfaces.Listable;
@@ -15,50 +16,55 @@ public class PhoneBookIT {
 
     public PhoneBookIT() {
     }
+    
+    private InsertData datos;
+    private int numeroUsuariosEsperados;
+	
+	@Before
+	public void init() throws IOException {
+            InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
+            datos.readTXT();
+	}
 
     @Test
-    public void testListUsers() throws IOException { //Pendiente de forma de testear de manera correcta
-        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
+    public void testListUsers() throws IOException { //Pendiente de forma de testear de manera correcta        
         PhoneBook agenda = new PhoneBook();
-        datos.readTXT();
-        agenda.ListUsers("Kevin");
-        int contador = 0;
+        agenda.listUsers("Kevin");
+        numeroUsuariosEsperados = 0;
         for (StringTokenizer stringTokenizer = new StringTokenizer(agenda.getPrintCode()); stringTokenizer.hasMoreTokens();) {
             String token = stringTokenizer.nextToken();
 
             if (token.equalsIgnoreCase("Kevin")) {
-                contador += 1;
+                numeroUsuariosEsperados += 1;
 
             }
         }
-        assertThat(contador).isEqualTo(5);
+        assertThat(numeroUsuariosEsperados).isEqualTo(5);
     }
 
     @Test
     public void testListUsers1() throws IOException {
         PhoneBook agenda = new PhoneBook("Linda", "San Antonio");
-        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
-        datos.readTXT();
-        agenda.AddUsers("Linda", "00000000", "san antonio");
-        agenda.ListUsers();
+        agenda.addUsers("Linda", "00000000", "san antonio");
+        agenda.listUsers();
 
-        int contador = 0;
+        numeroUsuariosEsperados = 0;
         for (StringTokenizer stringTokenizer = new StringTokenizer(agenda.getPrintCode()); stringTokenizer.hasMoreTokens();) {
             String token = stringTokenizer.nextToken();
 
             if (token.equalsIgnoreCase("linda")) {
-                contador += 1;
+                numeroUsuariosEsperados += 1;
 
             }
         }
-        assertThat(contador).isEqualTo(2);
-        agenda.DeleteUsers("00000000");
+        assertThat(numeroUsuariosEsperados).isEqualTo(2);
+        agenda.deleteUsers("00000000");
     }
 
     @Test
     public void testAddUssers() {
         PhoneBook agenda = new PhoneBook();
-        agenda.AddUsers("Jose", "654000000", "Palma");
+        agenda.addUsers("Jose", "654000000", "Palma");
         assertNotNull(Bbdd.phoneBook);
         assertNotNull(Bbdd.nameAndCities);
         assertEquals(8, Bbdd.phoneBook.size());
@@ -69,65 +75,65 @@ public class PhoneBookIT {
     @Test
     public void testDeleteUsers() {
         PhoneBook agenda = new PhoneBook();
-        agenda.AddUsers("Jose", "654000000", "Palma");
+        int numeroUsuariosEsperados=7;
+        agenda.addUsers("Jose", "654000000", "Palma");
         assertNotNull(Bbdd.phoneBook);
         assertNotNull(Bbdd.nameAndCities);
-        agenda.DeleteUsers("654000000");
-        assertEquals(0, Bbdd.phoneBook.size());
-        assertEquals(0, Bbdd.nameAndCities.size());
+        assertEquals(8, Bbdd.phoneBook.size());
+        agenda.deleteUsers("654000000");
+        assertEquals(numeroUsuariosEsperados, Bbdd.nameAndCities.size());
     }
 
     @Test
     public void testFindUsers() throws IOException {
         PhoneBook agenda = new PhoneBook();
-        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
-        datos.readTXT();
-        agenda.FindUsers("kevin", "phoenix");
+        agenda.findUsers("kevin", "phoenix");
 
-        double contador = 0;
+        double usuarios = 0;
+        numeroUsuariosEsperados=2;
 
         for (StringTokenizer stringTokenizer = new StringTokenizer(agenda.getPrintCode()); stringTokenizer.hasMoreTokens();) {
             String token = stringTokenizer.nextToken();
 
             if (token.equalsIgnoreCase("Kevin")) {
-                contador += 0.5;
+                usuarios += 0.5;
 
             } else if (token.equalsIgnoreCase("phoenix")) {
-                contador += 0.5;
+                usuarios += 0.5;
             } else {
 
             }
         }
 
-        assertThat(contador).isEqualTo(2);
+        assertThat(usuarios).isEqualTo(numeroUsuariosEsperados);
 
     }
 
     @Test
     public void testFindUsers1() throws IOException {
         PhoneBook agenda = new PhoneBook("Garcia", "Virginia beach");
-        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
-        datos.readTXT();
-        agenda.FindUsers();
-        double contador = 0;
+        agenda.findUsers();
+        double usuarios = 0;
+        numeroUsuariosEsperados=1;
 
         for (StringTokenizer stringTokenizer = new StringTokenizer(agenda.getPrintCode()); stringTokenizer.hasMoreTokens();) {
             String token = stringTokenizer.nextToken();
 
             if (token.equalsIgnoreCase(agenda.getName())) {
-                contador += 0.5;
+                usuarios += 0.5;
 
             } else if (token.equalsIgnoreCase("Virginia")) {
-                contador += 0.25;
+                usuarios += 0.25;
                 
             } else if (token.equalsIgnoreCase("beach")) {
-                contador += 0.25;
+                usuarios += 0.25;
+            
             } else {
 
             }
         }
 
-        assertEquals(contador, 1, 0);
+        assertEquals(usuarios, numeroUsuariosEsperados, 0);
 
     }
     @Test

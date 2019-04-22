@@ -65,7 +65,7 @@ public class PhoneBook implements Listable, Findable, Printable {
     }
 
     @Override
-    public String ListUsers(String name) { //He modificado el nombre del metodo porque me parecia poco intuitivo
+    public String listUsers(String name) { //He modificado el nombre del metodo porque me parecia poco intuitivo
 
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorre la base de datos
             if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(name))) { //Esta condicion busca que el valor del mapa contenga parte del nombre pasado por parametro
@@ -83,7 +83,7 @@ public class PhoneBook implements Listable, Findable, Printable {
 
     //Metodo sobrecargado
     @Override
-    public String ListUsers() { //Lo mismo que el metodo anterior pero sin pasarle parametros
+    public String listUsers() { //Lo mismo que el metodo anterior pero sin pasarle parametros
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorre la base de datos
             if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(getName()))) { //Esta condicion busca que el valor del mapa contenga parte del nombre pasado por parametro
                 setPrintCode("\n" + Bbdd.phoneBook.get(phone) + " y su telefono es " + phone); //Mensaje con los contactos encontrados
@@ -99,7 +99,7 @@ public class PhoneBook implements Listable, Findable, Printable {
     }
 
     @Override
-    public String FindUsers(String name, String cities) {//He modificado el nombre porque no me parecia lo suficientemente descriptivo
+    public String findUsers(String name, String cities) {//He modificado el nombre porque no me parecia lo suficientemente descriptivo
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorremos la base de datos
             if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(name)) && Bbdd.nameAndCities.get(phone).equalsIgnoreCase(cities)) {//Ignora si el nombre de la ciudad tiene mayusculas o minusculas
                 //Buscamos si el nombre está en la base de datos  y luego comparamos si las ciudades coinciden
@@ -116,7 +116,7 @@ public class PhoneBook implements Listable, Findable, Printable {
     }
 
     @Override
-    public String FindUsers() {
+    public String findUsers() {
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorremos la base de datos
             if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(getName())) && Bbdd.nameAndCities.get(phone).equalsIgnoreCase(getCity())) {
                 //Buscamos si el nombre está en la base de datos  y luego comparamos si las ciudades coinciden
@@ -143,12 +143,12 @@ public class PhoneBook implements Listable, Findable, Printable {
         System.out.println(getPrintCode());
     }
 
-    public void AddUsers(String name, String phone, String city) { //Te permite añadir contacto a la base de datos
+    public void addUsers(String name, String phone, String city) { //Te permite añadir contacto a la base de datos
         Bbdd.phoneBook.put(phone, name);
         Bbdd.nameAndCities.put(phone, city);
     }
 
-    public void DeleteUsers(String phone) { //Te permite eliminar contactos de la base de datos
+    public void deleteUsers(String phone) { //Te permite eliminar contactos de la base de datos
         
         if (Bbdd.phoneBook.containsKey(phone)) {
             Bbdd.phoneBook.remove(phone);
