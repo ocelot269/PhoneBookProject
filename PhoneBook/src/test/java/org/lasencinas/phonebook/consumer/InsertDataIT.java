@@ -1,38 +1,40 @@
-
 package org.lasencinas.phonebook.consumer;
 
+import java.io.IOException;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.lasencinas.phonebook.bbdd.Bbdd;
 
-
 public class InsertDataIT {
-    
+
     public InsertDataIT() {
     }
 
-    
+    private InsertData datos;
+
+    @Before
+    public void init() throws IOException {
+        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
+        datos.readTXT();
+    }
+
     @Test
     public void testGetRoute() {
-        InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
+        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
         assertNotNull(datos);
-        assertEquals("C:/Users/ozeh/Desktop/AgendaTelefonica.txt", datos.getRoute());
+        assertEquals("agenda/AgendaTelefonica.txt", datos.getRoute());
     }
 
     @Test
     public void testSetRoute() {
-        InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
+        InsertData datos = new InsertData("agenda/AgendaTelefonica.txt");
         datos.setRoute("");
         assertEquals("", datos.getRoute());
     }
 
-    
     @Test
     public void testReadTXT() throws Exception {
-        InsertData datos = new InsertData("C:/Users/ozeh/Desktop/AgendaTelefonica.txt");
-        assertEquals(0,Bbdd.phoneBook.size());
-        assertEquals(0,Bbdd.nameAndCities.size());
-        datos.readTXT();
         assertNotNull(Bbdd.phoneBook);
         assertNotNull(Bbdd.nameAndCities);
         assertEquals(7, Bbdd.phoneBook.size());
@@ -41,5 +43,5 @@ public class InsertDataIT {
         assertEquals(false, Bbdd.nameAndCities.containsValue("Palma"));
         assertEquals(true, Bbdd.nameAndCities.containsValue("Phoenix"));
     }
-    
+
 }
