@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.lasencinas.phonebook.bbdd.Bbdd;
 
 import org.lasencinas.phonebook.interfaces.Readable;
+import org.lasencinas.phonebook.person.Person;
 
 public class InsertData implements Readable {
 
@@ -15,7 +16,7 @@ public class InsertData implements Readable {
     private String route = ""; //Programacion defensiva
     private String regex = "[|] "; //Expresion regular para separar mi .txt
 
-    //Constructor por defecto
+    //Constructor 
     public InsertData() {
 
     }
@@ -58,9 +59,9 @@ public class InsertData implements Readable {
                     String name = parts[0].trim(); //te obtiene los nombre del archivo de texto y el trim te quita tabulaciones y espacios al principio y al final del texto
                     String city = parts[1].trim();  //te obtiene las ciudades del archivo de texto y el trim te quita tabulaciones y espacios al principio y al final del texto
                     String phone = parts[2].trim(); //te obtiene los telefonos  del archivo de texto y el trim te quita tabulaciones y espacios al principio y al final del texto
-
-                    Bbdd.phoneBook.put(phone, name); //Añade a la base de datos telefono y nombre
-                    Bbdd.nameAndCities.put(phone, city); // Añade a la base de datos telefono y ciudad
+                    Person persona = new Person(name, city);
+                    Bbdd.phoneBook.put(phone, persona); //Añade a la base de datos telefono y nombre
+                    //Bbdd.nameAndCities.put(phone, city); // Añade a la base de datos telefono y ciudad
 
                 } else {
                     //Else por si hay algun caso inesperado
@@ -69,7 +70,7 @@ public class InsertData implements Readable {
             }
             phoneBookTXT.close(); //Cierras el Buffer
         } catch (FileNotFoundException e) {                 //Catch en caso de que no encuentre el archivo o la ruta sea equivocá
-            System.out.println("Archivo no encontrado,posibles causas, mal introducida la ruta o archivo no existente");
+            System.out.println("Archivo no encontrado,posibles causas, está mal introducida la ruta o archivo no existente");
         }
 
     }

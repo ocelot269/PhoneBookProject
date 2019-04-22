@@ -1,10 +1,12 @@
 package org.lasencinas.phonebook.consumer;
 
 import java.io.IOException;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.lasencinas.phonebook.bbdd.Bbdd;
+import org.lasencinas.phonebook.person.Person;
 
 public class InsertDataIT {
 
@@ -35,13 +37,40 @@ public class InsertDataIT {
 
     @Test
     public void testReadTXT() throws Exception {
-        assertNotNull(Bbdd.phoneBook);
-        assertNotNull(Bbdd.nameAndCities);
-        assertEquals(7, Bbdd.phoneBook.size());
-        assertEquals(7, Bbdd.nameAndCities.size());
-        assertEquals(true, Bbdd.phoneBook.containsValue("Kevin"));
-        assertEquals(false, Bbdd.nameAndCities.containsValue("Palma"));
-        assertEquals(true, Bbdd.nameAndCities.containsValue("Phoenix"));
+
+        int numeroUsuariosEsperados = 0;
+        for (Person string : Bbdd.phoneBook.values()) {
+            if ("Kevin".equalsIgnoreCase(string.getName())) {
+                numeroUsuariosEsperados += 1;
+            }
+        }
+        assertThat(numeroUsuariosEsperados).isEqualTo(2);
+
     }
 
+    @Test
+    public void testReadTXT1() throws Exception {
+
+        int numeroUsuariosEsperados = 0;
+        for (Person string : Bbdd.phoneBook.values()) {
+            if ("Kevin Garcia".equalsIgnoreCase(string.getName())) {
+                numeroUsuariosEsperados += 1;
+            }
+        }
+        assertThat(numeroUsuariosEsperados).isEqualTo(1);
+
+    }
+
+    @Test
+    public void testReadTXT2() throws Exception {
+
+        int numeroUsuariosEsperados = 0;
+        for (Person string : Bbdd.phoneBook.values()) {
+            if ("Kevin Clark Jones".equalsIgnoreCase(string.getName())) {
+                numeroUsuariosEsperados += 1;
+            }
+        }
+        assertThat(numeroUsuariosEsperados).isEqualTo(1);
+
+    }
 }

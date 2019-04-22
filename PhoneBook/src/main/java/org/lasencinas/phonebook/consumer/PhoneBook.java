@@ -6,13 +6,14 @@ import org.lasencinas.phonebook.bbdd.Bbdd;
 import org.lasencinas.phonebook.interfaces.Findable;
 import org.lasencinas.phonebook.interfaces.Listable;
 import org.lasencinas.phonebook.interfaces.Printable;
+import org.lasencinas.phonebook.person.Person;
 
 public class PhoneBook implements Listable, Findable, Printable {
 
     //Variables
     private String name = ""; //Programacion defensiva
     private String city = ""; //Programacion defensiva
-    private Set<String> usersByName = new HashSet<>();
+    private Set<String> usersByName = new HashSet<>();//Elegido un set porque en caso de que se repitiese algun resultado,solo mostrará 1
     private String printCode = "";//programacion defensiva
 
     //Constructor 
@@ -43,15 +44,11 @@ public class PhoneBook implements Listable, Findable, Printable {
         this.city = city;
     }
 
-    public void setUsersByName(Set<String> usersByName) {
-        this.usersByName = usersByName;
-    }
-
     public Set<String> getUsersByName() {
         return usersByName;
     }
 
-    public String getPrintCode() {
+    public String getPrintCode() { //Imprimira un string
         return printCode;
     }
 
@@ -68,8 +65,8 @@ public class PhoneBook implements Listable, Findable, Printable {
     public String listUsers(String name) { //He modificado el nombre del metodo porque me parecia poco intuitivo
 
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorre la base de datos
-            if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(name))) { //Esta condicion busca que el valor del mapa contenga parte del nombre pasado por parametro
-                setPrintCode("\n" + Bbdd.phoneBook.get(phone) + " y su telefono es " + phone); //Mensaje con los contactos encontrados
+            if (Bbdd.phoneBook.get(phone).getName().contains(firstUppercaseChar(name))) { //Esta condicion busca que el valor del mapa contenga parte del nombre pasado por parametro
+                setPrintCode("\n" + Bbdd.phoneBook.get(phone).getName() + " y su telefono es " + phone); //Mensaje con los contactos encontrados
                 getUsersByName().add(getPrintCode());//Lo añades al Hashset
             } else {
                 //Si no encuentra nada falla silenciosamente
@@ -85,8 +82,8 @@ public class PhoneBook implements Listable, Findable, Printable {
     @Override
     public String listUsers() { //Lo mismo que el metodo anterior pero sin pasarle parametros
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorre la base de datos
-            if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(getName()))) { //Esta condicion busca que el valor del mapa contenga parte del nombre pasado por parametro
-                setPrintCode("\n" + Bbdd.phoneBook.get(phone) + " y su telefono es " + phone); //Mensaje con los contactos encontrados
+            if (Bbdd.phoneBook.get(phone).getName().contains(firstUppercaseChar(getName()))) { //Esta condicion busca que el valor del mapa contenga parte del nombre pasado por parametro
+                setPrintCode("\n" + Bbdd.phoneBook.get(phone).getName() + " y su telefono es " + phone); //Mensaje con los contactos encontrados
                 getUsersByName().add(getPrintCode());//Lo añades al Hashset
             } else {
                 //Si no encuentra nada falla silenciosamente
@@ -101,9 +98,9 @@ public class PhoneBook implements Listable, Findable, Printable {
     @Override
     public String findUsers(String name, String cities) {//He modificado el nombre porque no me parecia lo suficientemente descriptivo
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorremos la base de datos
-            if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(name)) && Bbdd.nameAndCities.get(phone).equalsIgnoreCase(cities)) {//Ignora si el nombre de la ciudad tiene mayusculas o minusculas
+            if (Bbdd.phoneBook.get(phone).getName().contains(firstUppercaseChar(name)) && Bbdd.phoneBook.get(phone).getCity().equalsIgnoreCase(cities)) {//Ignora si el nombre de la ciudad tiene mayusculas o minusculas
                 //Buscamos si el nombre está en la base de datos  y luego comparamos si las ciudades coinciden
-                setPrintCode("\n" + Bbdd.phoneBook.get(phone) + " su telefono es " + phone + " y vive en " + cities);
+                setPrintCode("\n" + Bbdd.phoneBook.get(phone).getName() + " su telefono es " + phone + " y vive en " + cities);
                 getUsersByName().add(getPrintCode());//Lo añades al Hashset
             } else {
                 //Falla silenciosamente
@@ -118,9 +115,9 @@ public class PhoneBook implements Listable, Findable, Printable {
     @Override
     public String findUsers() {
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorremos la base de datos
-            if (Bbdd.phoneBook.get(phone).contains(firstUppercaseChar(getName())) && Bbdd.nameAndCities.get(phone).equalsIgnoreCase(getCity())) {
+            if (Bbdd.phoneBook.get(phone).getName().contains(firstUppercaseChar(getName())) && Bbdd.phoneBook.get(phone).getCity().equalsIgnoreCase(getCity())) {
                 //Buscamos si el nombre está en la base de datos  y luego comparamos si las ciudades coinciden
-                setPrintCode("\n" + Bbdd.phoneBook.get(phone) + " su telefono es " + phone + " y vive en " + getCity());
+                setPrintCode("\n" + Bbdd.phoneBook.get(phone).getName() + " su telefono es " + phone + " y vive en " + Bbdd.phoneBook.get(phone).getCity());
                 getUsersByName().add(getPrintCode());//Lo añades al Hashset
             } else {
                 //Falla silenciosamente
@@ -143,16 +140,16 @@ public class PhoneBook implements Listable, Findable, Printable {
         System.out.println(getPrintCode());
     }
 
-    public void addUsers(String name, String phone, String city) { //Te permite añadir contacto a la base de datos
-        Bbdd.phoneBook.put(phone, name);
-        Bbdd.nameAndCities.put(phone, city);
+    public void addUsers(String name, String phone, String city) { //Te permite añadir contacto a la agenda
+        Person persona = new Person(name, city);
+        Bbdd.phoneBook.put(phone, persona);
+
     }
 
-    public void deleteUsers(String phone) { //Te permite eliminar contactos de la base de datos
-        
+    public void deleteUsers(String phone) { //Te permite eliminar contactos de la agenda
+
         if (Bbdd.phoneBook.containsKey(phone)) {
             Bbdd.phoneBook.remove(phone);
-            Bbdd.nameAndCities.remove(phone);
         }
 
     }

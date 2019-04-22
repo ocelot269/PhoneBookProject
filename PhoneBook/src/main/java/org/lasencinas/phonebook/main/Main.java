@@ -12,13 +12,14 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Readable datos = new InsertData("agenda/AgendaTelefonica.txt"); //Introduzca la ruta a su archivo.txt
+        Readable datos = new InsertData("agenda/AgendaTelefonica.txt"); //Ruta al archivo
+
         PhoneBook agenda = new PhoneBook();
         //PhoneBook agenda1 = new PhoneBook("Jones", "Portland"); //Constructor opcional que recibe 2 parametros nombre y ciudad
         datos.readTXT();
 
         System.out.println("\nArrancando agenda electronica... \n");
-        
+
         System.out.println("..............-:+**===**+:.............\n"
                 + "\n"
                 + "..........:*=================*-........\n"
@@ -57,60 +58,52 @@ public class Main {
                 + "\n"
                 + ".*============================:........");
 
-        System.out.println("\nBienvenido...");
+        System.out.println("\nBienvenido...\n");
 
-        System.out.println("Buscando similitudes... \n");
+        System.out.println("Buscando similitudes...");
 
         agenda.listUsers("ke"); //En este metodo puedes buscar el nombre de cualquier persona de la base de datos
-        
-        //agenda1.listUsers(); //Este metodo es igual al anterior pero sin pasarle parametros //Opcional
-        
-        //agenda1.showResultSearch(); //Te muestra por pantalla las busquedas
 
+        //agenda1.listUsers(); //Este metodo es igual al anterior pero sin pasarle parametros //Opcional
+        //agenda1.showResultSearch(); //Te muestra por pantalla las busquedas
         agenda.showResultSearch();
-        
+
         System.out.println("\nEstos son todos los contactos listados");
 
         agenda.addUsers("Jose", "654020017", "Palma");
-        
+
         //agenda1.addUsers("Jose", "654020017", "Palma"); //agregar usuario para la agenda 1
         
-        System.out.println("\nContacto añadido exitosamente\n");
+        System.out.println("\nContacto añadido exitosamente");
 
         System.out.println("\nProcesando busqueda por nombre y ciudad\n");
 
-        System.out.println("Buscando en la base de datos coincidencias...\n");
+        System.out.println("Buscando en la base de datos coincidencias...");
 
         agenda.findUsers("Jose", "Palma");//Buscamos por nombre y ciudad
-        
-        //agenda1.findUsers();  //Opcional
-        
-        //agenda1.showResultSearch(); //Opcional
 
+        //agenda1.findUsers();  //Opcional
+        //agenda1.showResultSearch(); //Opcional
         agenda.showResultSearch();
-        
+
         agenda.deleteUsers("654020017");
-        
+
         //agenda1.deleteUsers("654020017");  //agregar usuario para la agenda 1
-        
-        System.out.println("\nContacto eliminado exitosamente\n");
+        System.out.println("\nContacto eliminado exitosamente");
 
         agenda.findUsers("Jose", "Palma");//No debe aparecer porque esta eliminado
-        
-        agenda.showResultSearch();
-        
-        //agenda1.showResultSearch(); // Mostrar el resultado para agenda1
 
-        System.out.println("\nIniciando busqueda ..\n");
+        agenda.showResultSearch();
+
+        //agenda1.showResultSearch(); // Mostrar el resultado para agenda1
+        System.out.println("Iniciando busqueda ..");
 
         agenda.findUsers("Garcia", "virginia beach");
-        
+
         agenda.showResultSearch();
-        
+
         //agenda1.findUsers("Garcia", "virginia beach");
-
         //agenda1.showResultSearch();
-
         System.out.println("\nApagando agenda...");
 
     }
