@@ -100,7 +100,7 @@ public class PhoneBook implements Listable, Findable, Printable {
         for (String phone : Bbdd.phoneBook.keySet()) { //Recorremos la base de datos
             if (Bbdd.phoneBook.get(phone).getName().contains(firstUppercaseChar(name)) && Bbdd.phoneBook.get(phone).getCity().equalsIgnoreCase(cities)) {//Ignora si el nombre de la ciudad tiene mayusculas o minusculas
                 //Buscamos si el nombre está en la base de datos  y luego comparamos si las ciudades coinciden
-                setPrintCode("\n" + Bbdd.phoneBook.get(phone).getName() + " su telefono es " + phone + " y vive en " + cities);
+                setPrintCode("\n" + Bbdd.phoneBook.get(phone).getName() + " su telefono es " + phone + " y vive en " + Bbdd.phoneBook.get(phone).getCity());
                 getUsersByName().add(getPrintCode());//Lo añades al Hashset
             } else {
                 //Falla silenciosamente

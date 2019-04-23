@@ -102,8 +102,9 @@ public class Main {
 
         agenda.showResultSearch();
 
-        //agenda1.findUsers("Garcia", "virginia beach");
-        //agenda1.showResultSearch();
+       // agenda1.findUsers(); //Opcional
+       
+       // agenda1.showResultSearch();
         System.out.println("\nApagando agenda...");
 
     }
